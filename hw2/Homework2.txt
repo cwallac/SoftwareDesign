@@ -1,0 +1,27 @@
+﻿Chris Wallace
+Softdes Homework 2
+
+Question 1: 
+	a. grep searches a file for a word, and will pring out any lines containing that word.
+	b. A pipe takes the output of a command to a new process and a redirect saves it to a file
+	c. You can not get it back.
+Question 2:
+
+	a. NOTHING
+	b. 1.57, 0 since integer division rounds down. 
+	c.
+		1. The volume with radius 5 is 523.6
+		2. The wholesale cost is $945.45
+	3. You arrive back at 7:30 and 6 seconds
+
+Question 4
+
+	a. An untracked file is one that is in the proejct folder, but GIT is not keeping track of.
+	b. You should only commit files required to rebuild your repo, as such object files are not needed.
+c. A remote repo is a repository that is located on a different server and is safe from hard drive failures.
+
+Question 6
+
+	a. A void function returns no value while a fruitful function returns a value.
+	b.  Functions are good for reducing repetition in code, and abstracting complex tasks into 'black box' functions.
+	c. import library and from library import function or * 
