@@ -11,10 +11,13 @@ def get_primes(n):
     isPrime = True
 
     for i in range(1,n+1):
-        for j in range(1,i):
+        isPrime = True
+        print i
+        for j in range(2,i):
             if i % j == 0:
                 isPrime = False
         if isPrime:
+            
             return_val.append(i)
     return return_val
 
