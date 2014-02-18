@@ -6,8 +6,8 @@ Created on Sat Feb  1 19:55:59 2014
 """
 
 def check_fermat(a,b,c,n):
-    if n > 2:
-        if (a**n + b**n == c**n):
+    if n > 2:                             # you can combind these two
+        if (a**n + b**n == c**n):         # conditionals to make it a single conditional
             print 'FERMAT WAS WRONG'
         else: 
             print "No, that doesn't work"
@@ -25,3 +25,10 @@ def user_check():
    check_fermat(a,b,c,n)
    
 user_check()
+
+'''
+Once again, excellent work.
+One comment: you can combine the two conditionals 
+to make it a single conditional and not have the
+"N must be greater than two" print line
+'''

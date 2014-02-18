@@ -12,9 +12,14 @@ def compare(x,y):
     elif x == y:
         return 0
         
-    elif x < y:
+    elif x < y:     # would have used `else`
         return -1
         
 print compare(2,1) #1
 print compare(2,2) #0
 print compare(1,2) #-1
+
+'''
+I personally would have used an all-inclusive `else:` statement,
+but otherwise, excellent work!
+'''

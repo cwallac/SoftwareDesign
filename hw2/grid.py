@@ -6,7 +6,7 @@ Created on Sat Feb  1 18:58:29 2014
 """
 def gridPattern(n):
     
-    def printRow(n):
+    def printRow(n):                  # nested functions!
         print '+' + ('-'*4 + '+')*n
     
     def printFiller(n):
@@ -20,6 +20,9 @@ def gridPattern(n):
         
 gridPattern(3)
 
+'''
+Great use of nested functions and string multiplication
+'''
         
     
     
