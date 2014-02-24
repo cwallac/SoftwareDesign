@@ -36,7 +36,7 @@ def coding_strand_to_AA(dna):
                 
     return result 
     # YOUR IMPLEMENTATION HERE
-    
+
 def coding_strand_to_AA_unit_tests():
     """ Unit tests for the coding_strand_to_AA function """
     res1 = coding_strand_to_AA('TTTTTT')
@@ -84,6 +84,7 @@ def rest_of_ORF(dna):
     
     for i in range(0,len(dna),3):
         
+        # a shorthand: if dna[i:i+3] in ['TAG', 'TAA', 'TGA']:
         if dna[i:i+3] == 'TAG' or dna[i:i+3] == 'TAA' or dna[i:i+3] == 'TGA':
             return dna[0:i]
         
@@ -114,7 +115,7 @@ def find_all_ORFs_oneframe(dna):
     while i < len(dna):
         
         if dna[i:i+3] == 'ATG':
-            frame = rest_of_ORF(dna[i::])
+            frame = rest_of_ORF(dna[i::]) # no need to have the second colon if no `step` is required
             i += len(frame)-3
             results.append(frame)
         i += 3
@@ -152,6 +153,18 @@ def find_all_ORFs(dna):
     return results
     # YOUR IMPLEMENTATION HERE
 
+'''
+You could also do:
+
+results = []
+
+results.append(find_all_ORFs_oneframe(dna))
+results.append(find_all_ORFs_oneframe(dna[1:]))
+results.append(find_all_ORFs_oneframe(dna[2:]))
+
+return results
+'''
+
 def find_all_ORFs_unit_tests():
     """ Unit tests for the find_all_ORFs function """
     res = find_all_ORFs("ATGCATGAATGTAG")
@@ -168,6 +181,8 @@ def find_all_ORFs_both_strands(dna):
     """
     revres = find_all_ORFs(get_reverse_complement(dna))
     res = find_all_ORFs(dna)
+
+    # shorthand: return res + revres
     for i in range(len(revres)):
         res.append(revres[i])
     return res
@@ -244,4 +259,3 @@ def gene_finder(dna, threshold):
             
             aminos.append(coding_strand_to_AA(frames[i]))
     return aminos
-            
