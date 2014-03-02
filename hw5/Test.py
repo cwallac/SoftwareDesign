@@ -1,25 +1,27 @@
-# -*- coding: utf-8 -*-
+
+"# -*- coding: utf-8 -*-
 """
 Created on Sun Mar  2 16:06:55 2014
 
 @author: cwallace
 """
 from Functions import *
-Books = {}
-IlBooks = ['BuckleyIliad','ButlerIliad','PopeIliad'] ##Names Of File
-
-Books['Iliad'] = IlBooks
-
+Authors = {}
+CDBooks = ['AChristmasCarol','OliverTwist','ATaleofTwoCities','DavidCopperField','GreatExpectations']
+MTBooks = ['HuckFinn','TomSawyer','RoughingIt','ATrampAbroad','LifeOnTheMississippi']
+Romance = ['TheRomanceOfLust']
+Authors['CharlesDickens'] = CDBooks
+Authors['MarkTwain'] = MTBooks
 
 AuthorAveragePos = {}
 AuthorAveSub = {}
-for Work in Books:
+for Author in Authors:
     Positivity = {}
     totalPos = 0
     totalSub = 0 
     Subjectivity = {}
     print Author
-    for Book in Books[Work]:
+    for Book in Authors[Author]:
         
         sentiment = open_Book(Book+'.txt')
         Positivity[Book] = sentiment[0]
@@ -28,16 +30,8 @@ for Work in Books:
         totalSub += sentiment[1]
     Positivity['AVERAGE'] = totalPos/len(Books)
     Subjectivity['AVERAGE'] = totalSub/len(Books)
-    print Positivity
     AuthorAveragePos[Author] = Positivity['AVERAGE']
     AuthorAveSub[Author] = Subjectivity['AVERAGE']
      
 print AuthorAveragePos, AuthorAveSub
     
-    
-    
-
-
-
-
-
