@@ -7,6 +7,7 @@ Created on Sun Mar  2 16:06:55 2014
 """
 from Functions import open_Book
 Works = {}
+returnList = []
 IlBooks = ['BuckleyIliad','PopeIliad','ButlerIliad']
 
 Works['Iliad'] = IlBooks
@@ -27,12 +28,9 @@ for Work in Works:
         Subjectivity[Book] = sentiment[1]
         totalPos += sentiment[0]
         totalSub += sentiment[1]
-        
-    print Positivity, Subjectivity
-    Positivity['AVERAGE'] = totalPos/len(Works[Work])
-    Subjectivity['AVERAGE'] = totalSub/len(Works[Work])
-    TransPos[Work] = Positivity['AVERAGE']
-    TransSub[Work] = Subjectivity['AVERAGE']
-     
-print TransPos, TransSub
+        combined = (Positivity,Subjectivity)
+    returnList.append(combined)
+print returnList
+
+
     
