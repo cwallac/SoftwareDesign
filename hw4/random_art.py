@@ -12,11 +12,9 @@ import Image
 
 def build_random_function(min_depth, max_depth):
     # your doc string goes here
-    ''' Inputs a minimum and maximum depth of recursion (min, max), creates a randomly nested list corresponding to function
+    """ Inputs a minimum and maximum depth of recursion (min, max), creates a randomly nested list corresponding to function
     operations and parameters. Available operations are cos(pi*x), sin(pi*x), arctan(x),products(x,y), x**2 and then either the x or y value
-    Outputs a nested listed in the form of [operation,[paramter],[parameter]]
-    # your code goes here
-    
+    Outputs a nested listed in the form of [operation,[paramter],[parameter]] """
     
     if min_depth > 0:
         choices = [['prod',['a'],['b']],['cos_pi',['a']],['sin_pi',['a']],['arctan',['a']],['squared',['a']]]
@@ -45,23 +43,23 @@ def build_random_function(min_depth, max_depth):
         else:
             return [choices[randnum][0],build_random_function(min_depth-1,max_depth-1)]
 
-
+    """ If you are copying most of a list twice (choices) you're probably not doing things as best as you could.
+        The one without the extra a and b in it could be done by using a slice of the list (choices[0:4])
+        Also, there isn't really a point in putting the a and b in lists.  How about ['prod', 'a', 'b']?
+        Nice job combining all the functions with just one input, instead of making an elif for each. """
 
         
 def evaluate_random_function(f, x, y):
-    # your doc string goes here
     '''
     Takes three inputs(f,x,y), first of which being a function constructed using build_random_function. 
     General form is a list: ['operator,[parameter1],[parameter2]] parameters can be nested lists
     in the same form. Inputs of x and y must be between 1 and negative 1 that will be input into the function'''
-    # your code goes here
     
     if f == ['a']:
         return x
     elif f == ['b']:
         return y
     elif f[0] == 'cos_pi' :
-        
         return cos(pi*evaluate_random_function(f[1], x, y))
     elif f[0] == 'sin_pi':
         return sin(pi*evaluate_random_function(f[1], x, y))
@@ -70,8 +68,9 @@ def evaluate_random_function(f, x, y):
     elif f[0] == 'squared':
         return evaluate_random_function(f[1], x, y)**2
     else:
-        
         return evaluate_random_function(f[1], x, y)*evaluate_random_function(f[2], x, y)
+
+""" this one is great """
 
 def remap_interval(val, input_interval_start, input_interval_end, output_interval_start, output_interval_end):
     """ Maps the input value that is in the interval [input_interval_start, input_interval_end]
@@ -80,7 +79,6 @@ def remap_interval(val, input_interval_start, input_interval_end, output_interva
        Inputs are: (val, input_interval_start, input_interval_end, output_interval_start, output_interval_end)
         
     """
-    # your code goes here
     
     outputRange = abs(output_interval_start - output_interval_end)
     inputRange = abs(input_interval_start - input_interval_end)
