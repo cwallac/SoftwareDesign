@@ -31,9 +31,11 @@ for Work in Works:
         
     for key, value in Positivity.iteritems():
         resultsFile.write(str(key) + ',' + 'Positivity' + ',' + str(value)+ '\n')
+        
+    resultsFile.write('\n')
     for key, value in Subjectivity.iteritems():
         resultsFile.write(str(key) + ',' + 'Subjectivity' + ',' + str(value)+ '\n')
-    
+    resultsFile.write('\n')
     
     
 
