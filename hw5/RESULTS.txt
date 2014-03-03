@@ -1,0 +1,12 @@
+CowperOdyssey,Positivity,0.13906453819
+ButlerOdyssey,Positivity,0.134425362572
+PopeOdyssey,Positivity,0.125
+CowperOdyssey,Positivity,0.53287438861
+ButlerOdyssey,Positivity,0.501783169392
+PopeOdyssey,Positivity,0.166666666667
+BuckleyIliad,Positivity,0.123994983852
+PopeIliad,Positivity,0.110676279818
+ButlerIliad,Positivity,0.134010546816
+BuckleyIliad,Positivity,0.523526037815
+PopeIliad,Positivity,0.523671165214
+ButlerIliad,Positivity,0.528835149381

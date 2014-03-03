@@ -8,29 +8,37 @@ Created on Sun Mar  2 16:06:55 2014
 from Functions import open_Book
 Works = {}
 returnList = []
+OdBooks = ['ButlerOdyssey','PopeOdyssey','CowperOdyssey']
 IlBooks = ['BuckleyIliad','PopeIliad','ButlerIliad']
 
 Works['Iliad'] = IlBooks
-
+Works['Odyysey'] = OdBooks
 
 TransPos = {}
 TransSub = {}
+resultsFile = open('RESULTS.txt','w+')
 for Work in Works:
     Positivity = {}
-    totalPos = 0
-    totalSub = 0 
+
     Subjectivity = {}
-    print Work
+    
     for Book in Works[Work]:
         
         sentiment = open_Book(Book+'.txt')
         Positivity[Book] = sentiment[0]
         Subjectivity[Book] = sentiment[1]
-        totalPos += sentiment[0]
-        totalSub += sentiment[1]
-        combined = (Positivity,Subjectivity)
-    returnList.append(combined)
-print returnList
+        
+        
+    for key, value in Positivity.iteritems():
+        resultsFile.write(str(key) + ',' + 'Positivity' + ',' + str(value)+ '\n')
+    for key, value in Subjectivity.iteritems():
+        resultsFile.write(str(key) + ',' + 'Subjectivity' + ',' + str(value)+ '\n')
+    
+    
+    
+
+resultsFile.close()
+ #First Dictionary is Positivity Second is Subjectivity
 
 
     
