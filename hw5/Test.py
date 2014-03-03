@@ -5,18 +5,18 @@ Created on Sun Mar  2 16:06:55 2014
 
 @author: cwallace
 """
-from Functions import open_Book
-Works = {}
-returnList = []
+import Functions
+
+Works = {} #Dictionary containing as keys each seperate work we used to see hwo translations vary
+
 OdBooks = ['ButlerOdyssey','PopeOdyssey','CowperOdyssey']
 IlBooks = ['BuckleyIliad','PopeIliad','ButlerIliad']
 
 Works['Iliad'] = IlBooks
 Works['Odyysey'] = OdBooks
 
-TransPos = {}
-TransSub = {}
-resultsFile = open('RESULTS.txt','w+')
+
+resultsFile = open('RESULTS.csv','w+')
 for Work in Works:
     Positivity = {}
 
@@ -24,7 +24,8 @@ for Work in Works:
     
     for Book in Works[Work]:
         
-        sentiment = open_Book(Book+'.txt')
+        sentiment = Functions.open_Book(Book+'.txt')
+        
         Positivity[Book] = sentiment[0]
         Subjectivity[Book] = sentiment[1]
         
