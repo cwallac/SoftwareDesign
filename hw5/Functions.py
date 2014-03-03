@@ -10,7 +10,8 @@ def open_Book(filename):
     returnList = []
     f = open(filename,'r')
     fulltext = f.read()
-    fulltext = fulltext[fulltext.index(' ***')+4:]
+    fulltext = fulltext[fulltext.index('***')+4:]
+    fulltext = fulltext[fulltext.index('***')+4:]
     fulltext = fulltext[:fulltext.index('***')]
     fulltext = fulltext.lower()
     textList = fulltext.split()

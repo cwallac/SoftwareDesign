@@ -1,37 +1,38 @@
 
-"# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 """
 Created on Sun Mar  2 16:06:55 2014
 
 @author: cwallace
 """
-from Functions import *
-Authors = {}
-CDBooks = ['AChristmasCarol','OliverTwist','ATaleofTwoCities','DavidCopperField','GreatExpectations']
-MTBooks = ['HuckFinn','TomSawyer','RoughingIt','ATrampAbroad','LifeOnTheMississippi']
-Romance = ['TheRomanceOfLust']
-Authors['CharlesDickens'] = CDBooks
-Authors['MarkTwain'] = MTBooks
+from Functions import open_Book
+Works = {}
+IlBooks = ['BuckleyIliad','PopeIliad','ButlerIliad']
 
-AuthorAveragePos = {}
-AuthorAveSub = {}
-for Author in Authors:
+Works['Iliad'] = IlBooks
+
+
+TransPos = {}
+TransSub = {}
+for Work in Works:
     Positivity = {}
     totalPos = 0
     totalSub = 0 
     Subjectivity = {}
-    print Author
-    for Book in Authors[Author]:
+    print Work
+    for Book in Works[Work]:
         
         sentiment = open_Book(Book+'.txt')
         Positivity[Book] = sentiment[0]
         Subjectivity[Book] = sentiment[1]
         totalPos += sentiment[0]
         totalSub += sentiment[1]
-    Positivity['AVERAGE'] = totalPos/len(Books)
-    Subjectivity['AVERAGE'] = totalSub/len(Books)
-    AuthorAveragePos[Author] = Positivity['AVERAGE']
-    AuthorAveSub[Author] = Subjectivity['AVERAGE']
+        
+    print Positivity, Subjectivity
+    Positivity['AVERAGE'] = totalPos/len(Works[Work])
+    Subjectivity['AVERAGE'] = totalSub/len(Works[Work])
+    TransPos[Work] = Positivity['AVERAGE']
+    TransSub[Work] = Subjectivity['AVERAGE']
      
-print AuthorAveragePos, AuthorAveSub
+print TransPos, TransSub
     
