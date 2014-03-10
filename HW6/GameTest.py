@@ -15,8 +15,9 @@ class DoodleJumpModel:
     def __init__(self):
         self.platforms = []
         for num in range(1,4):
+            for plat in range(1,6):
             
-                platform = Platform((0,135,0),random.randint(-75,75)+num*200,0)
+                platform = Platform((0,135,0),random.randint(-75,75)+num*200,plat*120)
                 self.platforms.append(platform)
         self.character = Jumper(100,100)
         
@@ -38,6 +39,7 @@ class DoodleJumpModel:
     def Collision(self):
         for base in self.platforms:
             if self.character.x in range(base.x-50,base.x+50):
+                print 'IT TOUCHED'
                 self.character.pos = 140
                 self.character.direction = -1
                 
@@ -59,15 +61,17 @@ class Jumper:
         self.color = (133,133,133)
         self.x = x
         self.y = y
+        self.isOnPlatform = 0 
         self.vx = 0
-        self.pos = 0
-        self.direction = .3
+        self.vy = .7
+
+        self.direction = 1
     
     def jump(self):
-        self.pos += 1
-        if self.pos < 0:
-            self.direction = .3
-        self.y += self.direction
+
+        if self.isOnPlatform == 1:
+            self.vy = .5
+        
         
         
         
@@ -77,8 +81,9 @@ class Jumper:
             
         if self.x < 0:
             self.x = 620
-        print self.x  
+         
         self.x += self.vx
+        self.y += self.vy
         
 class PyGameMouseController:
     def __init__(self,model):
@@ -97,6 +102,10 @@ class PyGameKeyboardController:
         if event.type != KEYDOWN:
             return
         if event.key == pygame.K_LEFT:
+            if self.model.character.vx >= -3:
+                self.model.character.vx += -1.0
+                
+        if event.key == pygame.K_UP:
             if self.model.character.vx >= -3:
                 self.model.character.vx += -1.0
             
@@ -157,7 +166,7 @@ if __name__ == '__main__':
         model.Collision()
         model.update()
         view.draw()
-        time.sleep(.001)
+        time.sleep(.1)
         
 
     pygame.quit()
