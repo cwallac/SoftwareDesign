@@ -13,6 +13,8 @@ import time
 
 GameLost = 0
 class DoodleJumpModel:
+    '''Model for game Block Jump'''
+    
     def __init__(self):
         self.platforms = []
         for num in range(1,4):
@@ -54,6 +56,8 @@ class DoodleJumpModel:
         
         
 class Platform:
+    ''' PLATFORMS to jump on'''
+    
     def __init__(self,color,x,y,length,width):
         self.color = color
         self.x = x
@@ -65,6 +69,7 @@ class Platform:
         self.y += .7
         
 class Jumper:
+    '''BRICK THAT HUMAN CONTROLS'''
     def __init__(self,x,y):
         self.color = (133,133,133)
         self.x = x
@@ -97,16 +102,10 @@ class Jumper:
         
         self.y += self.vy
         
-class PyGameMouseController:
-    def __init__(self,model):
-        self.model = model
-    
-    def handle_mouse_event(self,event):
-        if event.type == MOUSEMOTION:
-            self.model.character.x = event.pos[0] - 12.5
+
         
 class PyGameKeyboardController:
-    """ Handles keyboard input for brick breaker """
+    """ Handles keyboard input for Block Jump '''
     def __init__(self,model):
         self.model = model
     
@@ -144,7 +143,7 @@ class PyGameWindowView:
         pygame.display.update()
         
     def Loser(self):
-        
+        ''' SCreen displayed after loss'''
         img=pygame.image.load('Game_Over.jpg')
         pygame.display.flip()
         screen.blit(img,(0,0))
