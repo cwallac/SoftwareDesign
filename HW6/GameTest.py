@@ -18,7 +18,7 @@ class DoodleJumpModel:
         for num in range(1,4):
             for plat in range(1,6):
             
-                platform = Platform((0,135,0),random.randint(-75,75)+num*200,plat*120,100,10)
+                platform = Platform((0,135,0),random.randint(-75,75)+num*200,plat*120,80,10)
                 self.platforms.append(platform)
         self.character = Jumper(100,100)
         
@@ -38,7 +38,7 @@ class DoodleJumpModel:
     def newRow(self):
         for num in range(1,4):
             
-                platform = Platform((0,135,0),random.randint(-75,75)+num*150,0,100,10)
+                platform = Platform((0,135,0),random.randint(-75,75)+num*150,0,80,10)
                 self.platforms.append(platform)
     
     def Collision(self):
@@ -47,6 +47,7 @@ class DoodleJumpModel:
                 if not ((self.character.y+20 < (base.y)) or (self.character.y > base.y+base.width)):
                     print 'contact'
                     self.character.isOnPlatform = 1
+                    self.character.JumpingTimer = 220
                 
         
 
@@ -61,7 +62,7 @@ class Platform:
         self.width = width
         
     def update(self):
-        self.y += .1
+        self.y += .7
         
 class Jumper:
     def __init__(self,x,y):
@@ -69,16 +70,18 @@ class Jumper:
         self.x = x
         self.y = y
         self.isOnPlatform = 0 
-        self.isJumping = 0
+        self.JumpingTimer = 0
         self.vx = 0
         self.vy = .7
 
         self.direction = 1
     
     def jump(self):
-
-        if self.isOnPlatform == 1:
-            self.vy = .1
+        self.JumpingTimer += -1 
+        if self.JumpingTimer > 0:
+            self.vy = -.7
+        else:
+            self.vy = .7
         
         
         
@@ -91,7 +94,7 @@ class Jumper:
             self.x = 620
          
         self.x += self.vx
-        print self.vy
+        
         self.y += self.vy
         
 class PyGameMouseController:
@@ -111,8 +114,8 @@ class PyGameKeyboardController:
         if event.type != KEYDOWN:
             return
         if event.key == pygame.K_LEFT:
-            if self.model.character.vx >= -3:
-                self.model.character.vx += -1.0
+            if self.model.character.vx >= -1.5:
+                self.model.character.vx += -.1
                 
         if event.key == pygame.K_UP:
             self.model.character.isJumping = 1
@@ -123,8 +126,8 @@ class PyGameKeyboardController:
             
                 
         if event.key == pygame.K_RIGHT:
-            if self.model.character.vx <= 3:
-                self.model.character.vx += 1.0        
+            if self.model.character.vx <= 1.5:
+                self.model.character.vx += .1       
 
 class PyGameWindowView:
     """ A view of brick breaker rendered in a Pygame window """
@@ -165,7 +168,7 @@ if __name__ == '__main__':
     Started = 0
     while running:
         
-        count += 1
+        
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
@@ -191,16 +194,22 @@ if __name__ == '__main__':
         if Started == 0:
             time.sleep(.001)
         else:
-            if count % 250 == 0:
-                model.newRow()
+            count += 1
+            print count
+            if count == 50:
+              model.newRow()  
+            elif count % 140 == 0:
+               model.newRow() 
             model.Collision()
             model.update()
                 
             if model.update() == 1:
                 view.Loser()
+                
+                
             else:
                 view.draw()
-            time.sleep(.1)
+            time.sleep(.05)
         
 
     pygame.quit()
