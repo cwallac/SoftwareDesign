@@ -20,7 +20,7 @@ class DoodleJumpModel:
             
                 platform = Platform((0,135,0),random.randint(-75,75)+num*200,plat*120,100,10)
                 self.platforms.append(platform)
-        self.character = Jumper(100,100)
+        self.character = Jumper(100,100,0,.7)
         
                 
     def update(self):
@@ -42,11 +42,16 @@ class DoodleJumpModel:
                 self.platforms.append(platform)
     
     def Collision(self):
-        for base in self.platforms:
+        for base in self.platforms:gir
             if not ((self.character.x+20<base.x) or (self.character.x>base.x+base.length)): 
                 if not ((self.character.y+20 < (base.y)) or (self.character.y > base.y+base.width)):
                     print 'contact'
                     self.character.isOnPlatform = 1
+
+                
+        
+                
+ 
                 
         
 
@@ -60,25 +65,27 @@ class Platform:
         self.length = length
         self.width = width
         
+        
     def update(self):
         self.y += .1
         
 class Jumper:
-    def __init__(self,x,y):
+    def __init__(self,x,y,vx,vy):
         self.color = (133,133,133)
         self.x = x
-        self.y = y
-        self.isOnPlatform = 0 
+        self.y = y 
+        self.vx = vx
+        self.vy = vy
+        self.isOnPlatform = 0
         self.isJumping = 0
-        self.vx = 0
-        self.vy = .7
+        
 
         self.direction = 1
     
     def jump(self):
 
         if self.isOnPlatform == 1:
-            self.vy = .1
+            self.vy = .5
         
         
         
@@ -91,7 +98,6 @@ class Jumper:
             self.x = 620
          
         self.x += self.vx
-        print self.vy
         self.y += self.vy
         
 class PyGameMouseController:
@@ -133,7 +139,7 @@ class PyGameWindowView:
         self.screen = screen
         
     def draw(self):
-        self.screen.fill(pygame.Color(0,0,0))
+        self.screen.fill(pygame.Color(250,250,250))
         for brick in self.model.platforms:
     
             pygame.draw.rect(self.screen, pygame.Color(235,0,0),pygame.Rect(brick.x,brick.y,100,25))
@@ -204,4 +210,3 @@ if __name__ == '__main__':
         
 
     pygame.quit()
-
