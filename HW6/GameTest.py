@@ -67,6 +67,7 @@ class Jumper:
         self.x = x
         self.y = y
         self.isOnPlatform = 0 
+        self.isJumping = 0
         self.vx = 0
         self.vy = .7
 
@@ -111,7 +112,7 @@ class PyGameKeyboardController:
                 self.model.character.vx += -1.0
                 
         if event.key == pygame.K_UP:
-            print 'PRESSED UP!'
+            self.model.character.isJumping = 1
             
         if event.key == pygame.K_SPACE:
             print "GAME START"
