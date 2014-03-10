@@ -11,6 +11,7 @@ import random
 import math
 import time
 
+GameLost = 0
 class DoodleJumpModel:
     def __init__(self):
         self.platforms = []
@@ -27,6 +28,10 @@ class DoodleJumpModel:
             plat.update()
             if plat.y > 400:
                 self.platforms.remove(plat)
+            if self.character.y > 480:
+                return 1
+                
+                
             self.character.jump()
         
     
@@ -39,8 +44,8 @@ class DoodleJumpModel:
     def Collision(self):
         for base in self.platforms:
             if self.character.x in range(base.x-50,base.x+50):
-                print 'IT TOUCHED'
-                self.character.pos = 140
+                
+                
                 self.character.direction = -1
                 
         
@@ -106,8 +111,11 @@ class PyGameKeyboardController:
                 self.model.character.vx += -1.0
                 
         if event.key == pygame.K_UP:
-            if self.model.character.vx >= -3:
-                self.model.character.vx += -1.0
+            print 'PRESSED UP!'
+            
+        if event.key == pygame.K_SPACE:
+            print "GAME START"
+            return True
             
                 
         if event.key == pygame.K_RIGHT:
@@ -123,10 +131,17 @@ class PyGameWindowView:
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
         for brick in self.model.platforms:
-        
+    
             pygame.draw.rect(self.screen, pygame.Color(235,0,0),pygame.Rect(brick.x,brick.y,100,25))
-        pygame.draw.rect(self.screen, pygame.Color(133,133,133),pygame.Rect(self.model.character.x,self.model.character.y,25,25))     
+            pygame.draw.rect(self.screen, pygame.Color(133,133,133),pygame.Rect(self.model.character.x,self.model.character.y,25,25))     
         pygame.display.update()
+        
+    def Loser(self):
+        
+        img=pygame.image.load('Game_Over.jpg')
+        pygame.display.flip()
+        screen.blit(img,(0,0))
+
         
 
 if __name__ == '__main__':
@@ -143,13 +158,21 @@ if __name__ == '__main__':
 
     running = True
     count = 0
+    Started = 0
     while running:
-        count +=1
+        
+        count += 1
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
             if event.type == KEYDOWN:
                 controller.handle_keyboard_event(event)
+                
+                if controller.handle_keyboard_event(event) == True:
+                    Started = 1
+                    print 'GAME SHOULD START...'
+                    
+                    
             
     
          
@@ -161,12 +184,19 @@ if __name__ == '__main__':
             #if event.type == MOUSEMOTION:
              #   controller.handle_mouse_event(event)
     
-        if count % 250 == 0:
-            model.newRow()
-        model.Collision()
-        model.update()
-        view.draw()
-        time.sleep(.1)
+        if Started == 0:
+            time.sleep(.001)
+        else:
+            if count % 250 == 0:
+                model.newRow()
+            model.Collision()
+            model.update()
+                
+            if model.update() == 1:
+                view.Loser()
+            else:
+                view.draw()
+            time.sleep(.1)
         
 
     pygame.quit()
