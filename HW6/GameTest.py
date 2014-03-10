@@ -47,7 +47,7 @@ class DoodleJumpModel:
         for base in self.platforms:
             if not ((self.character.x+20<base.x) or (self.character.x>base.x+base.length)): 
                 if not ((self.character.y+20 < (base.y)) or (self.character.y > base.y+base.width)):
-                    print 'contact'
+                     
                     self.character.isOnPlatform = 1
                     self.character.JumpingTimer = 220
                 
@@ -105,7 +105,7 @@ class Jumper:
 
         
 class PyGameKeyboardController:
-    """ Handles keyboard input for Block Jump '''
+    """ Handles keyboard input for Block Jump """
     def __init__(self,model):
         self.model = model
     
@@ -194,7 +194,7 @@ if __name__ == '__main__':
             time.sleep(.001)
         else:
             count += 1
-            print count
+            
             if count == 50:
               model.newRow()  
             elif count % 140 == 0:
