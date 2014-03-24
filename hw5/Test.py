@@ -19,7 +19,8 @@ IlBooks = ['BuckleyIliad','PopeIliad','ButlerIliad']
 
 Works['Iliad'] = IlBooks
 Works['Odyysey'] = OdBooks
-
+""" Odyysey is spelled wrong and the reason you didn't notice is because you never using the key/value functionality.
+    This means that using a dictionary isn't buying you anything.  It would have been simpler to just iterate through a list."""
 
 resultsFile = open('RESULTS.csv','w+')
 for Work in Works:
