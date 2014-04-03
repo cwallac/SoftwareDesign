@@ -115,7 +115,9 @@ class PyGameKeyboardController:
         if event.key == pygame.K_LEFT:
             if self.model.character.vx >= -1.5:
                 self.model.character.vx += -.1
-                
+        
+        # what's the significance of mapping the UP key?
+        # use if...elif...else
         if event.key == pygame.K_UP:
             self.model.character.isJumping = 1
             
@@ -169,6 +171,7 @@ if __name__ == '__main__':
         
         
         for event in pygame.event.get():
+            # you should use if...elif...else
             if event.type == QUIT:
                 running = False
             if event.type == KEYDOWN:
@@ -182,7 +185,7 @@ if __name__ == '__main__':
             
     
          
-    
+            # repetitive.
             if event.type == QUIT:
                 running = False
                 break
